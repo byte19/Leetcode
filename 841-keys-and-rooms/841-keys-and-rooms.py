@@ -4,10 +4,7 @@ class Solution(object):
         :type rooms: List[List[int]]
         :rtype: bool
         """
-        graph = {}
         visit = [False]*(len(rooms))
-        for i in range(len(rooms)):
-            graph[i] = rooms[i]
 
         stack = []
         stack.append(0)
@@ -15,7 +12,7 @@ class Solution(object):
             curr = stack.pop()
             if visit[curr]==False:
                 visit[curr] = True
-                for adj in graph[curr]:
+                for adj in rooms[curr]:
                     stack.append(adj)
         
         for i in range(len(visit)):
