@@ -10,13 +10,17 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
+        loop = False
         dict = {}
         temp = head
         while temp:
             if temp in dict:
-                return True
+                loop = True
+                break
             else:
                 dict[temp] = temp
             temp = temp.next
+        if loop:
+            return True
         return False
         
