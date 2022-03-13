@@ -20,6 +20,6 @@ class Solution(object):
                 else:
                     return False
         if len(stack)>0:
-            return 0
+            return False
         return True
         
