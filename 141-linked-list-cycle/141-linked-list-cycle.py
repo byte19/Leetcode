@@ -10,17 +10,16 @@ class Solution(object):
         :type head: ListNode
         :rtype: bool
         """
-        loop = False
-        dict = {}
-        temp = head
-        while temp:
-            if temp in dict:
-                loop = True
-                break
-            else:
-                dict[temp] = temp
-            temp = temp.next
-        if loop:
-            return True
-        return False
+        if head is None or head.next is None:
+            return False
         
+        tortoise = head
+        hare = head.next
+        
+        while hare and hare.next:
+            if hare == tortoise:
+                return True
+            
+            hare = hare.next.next
+            tortoise = tortoise.next
+        return False
