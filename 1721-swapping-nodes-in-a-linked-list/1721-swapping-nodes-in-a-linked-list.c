@@ -17,9 +17,9 @@ struct ListNode* swapNodes(struct ListNode* head, int k){
     }
     struct ListNode* beg;
     struct ListNode* end;
-    int starti = k-1;
-    int endi = len-k;
-    int i=0;
+    int starti = k;
+    int endi = len-k+1;
+    int i=1;
     temp = head;
     while(temp){
         if(i==starti)
