@@ -6,7 +6,7 @@ class Solution:
     def maxSubArraySum(self,a,N):
         global_max = float('-inf')
         local_max = 0
-        for i in range(0,N):
+        for i in range(N):
             local_max = max(local_max + a[i],a[i])
             if local_max > global_max:
                 global_max = local_max
