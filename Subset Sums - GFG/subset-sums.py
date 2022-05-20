@@ -13,7 +13,7 @@ class Solution:
 	    res = []
 	    summ = 0
 	    SubSum(0,arr,res,summ)
-	    return res
+	    return sorted(res)
 
 #{ 
 #  Driver Code Starts
