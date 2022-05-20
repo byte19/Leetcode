@@ -4,29 +4,23 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        
-        def subsets(i,arr,res,lis):
-            if i>=len(arr):
-                li_copy = []
-                li_copy.extend(sorted(lis))
-                res.append(li_copy)
-                return
-            
-            lis.append(arr[i])
-            subsets(i+1,arr,res,lis)
-            lis.pop()
-            
-            subsets(i+1,arr,res,lis)
-        
         res = []
-        lis = []
-        subsets(0,nums,res,lis)
         
-        b_set = set(map(tuple,res))
-        b = map(list,b_set)
-        
-        return b
+        def subSets(ind,arr,lis):
+            l_copy = []
+            l_copy.extend(lis)
+            res.append(l_copy)
             
+            for i in range(ind,len(arr)):
+                if i!=ind and arr[i]==arr[i-1]:continue
+                
+                lis.append(arr[i])
+                subSets(i+1,arr,lis)
+                lis.pop()
+        
+        nums.sort()    
+        subSets(0,nums,[])
+        return res
             
             
             
