@@ -4,24 +4,22 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        n = len(nums)
-        freq = [0]*n
+        
         res = []
         
-        def recurPermute(lis,freq,arr):
-            if len(lis)==len(arr):
-                li_copy = []
-                li_copy.extend(lis)
-                res.append(li_copy)
+        def permuta(ind,arr):
+            if ind>=len(arr):
+                lis = []
+                for num in arr:
+                    lis.append(num)
+                res.append(lis)
                 return
             
-            for i in range(len(arr)):
-                if freq[i]==0:
-                    lis.append(arr[i])
-                    freq[i]=1
-                    recurPermute(lis,freq,arr)
-                    freq[i]=0
-                    lis.pop()
+            for i in range(ind,len(arr)):
+                arr[ind],arr[i] = arr[i],arr[ind]
+                permuta(ind+1,arr)
+                arr[ind],arr[i] = arr[i],arr[ind]
+            
         
-        recurPermute([],freq,nums)
+        permuta(0,nums)
         return res
