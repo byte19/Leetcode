@@ -9,7 +9,9 @@ class Solution(object):
         s = s.lower()
         dict = {}
         res = []
+        
         def solve(i,s):
+            
             if i>=len(s):
                 b = copy.copy(s)
                 if b not in dict:
