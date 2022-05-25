@@ -16,7 +16,7 @@ class Solution(object):
                     b = []
                     b = copy.copy(lis)
                     res.append(b)
-                    dict[str(b)] = 1
+                    dict[str(lis)]=1
                     return
             for i in range(i,10):
                 lis.append(i)
