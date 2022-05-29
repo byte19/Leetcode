@@ -4,21 +4,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        
-        n = len(nums)-1
-        if n==0: return nums[n]
-        dp = [-1]*(n+1)
-        def solve(ind,dp):
-            if ind==0: return nums[ind]
-            if ind<0: return 0
+        n = len(nums)
+        dp = [0]*n
+        dp[0] = nums[0]
+        for i in range(1,n):
+            take = nums[i]
+            if i>1: take+=dp[i-2]
             
-            if dp[ind]!=-1: return dp[ind]
+            not_take = dp[i-1]
             
-            pick = nums[ind] + solve(ind-2,dp)
-            not_pick = solve(ind-1,dp)
+            dp[i] = max(take,not_take)
         
-            dp[ind] = max(pick,not_pick)
-            return dp[ind]
-        
-        solve(n,dp)
-        return dp[n]
+        return dp[-1]
