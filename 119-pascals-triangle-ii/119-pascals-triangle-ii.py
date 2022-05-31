@@ -1,17 +1,19 @@
 class Solution:
-    def getRow(self, numRows: int) -> List[int]:
+    def getRow(self, rowIndex: int) -> List[int]:
         
-        if numRows==0: return [1]
-        res = [[1],[1,1]]
+        if rowIndex==0: return [1]
+        res = [1,1]
         
-        for i in range(2,numRows+1):
+        for i in range(2,rowIndex+1):
+            
             lis = []
-            temp = res[-1]
-            lis.append(temp[0])
-            for i in range(1,len(temp)):
-                lis.append(temp[i] + temp[i-1])
-            lis.append(temp[-1])
-            res.append(lis)
+            lis.append(res[0])
+            
+            for i in range(1,len(res)):
+                lis.append(res[i] + res[i-1])
+            lis.append(res[-1])
+            
+            res = lis
         
-        return res[-1]
+        return res
         
