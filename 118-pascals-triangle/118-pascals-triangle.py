@@ -8,10 +8,14 @@ class Solution:
         for i in range(2,numRows):
             lis = []
             temp = res[-1]
+            
             lis.append(temp[0])
-            for i in range(1,len(temp)):
-                lis.append(temp[i] + temp[i-1])
+            
+            for j in range(1,len(temp)):
+                lis.append(temp[j] + temp[j-1])
+            
             lis.append(temp[-1])
+            
             res.append(lis)
         
         return res
