@@ -1,26 +1,26 @@
 class Solution {
 public:
-    
-    int f(int row,int col,vector<vector<int>>& matrix,int n,vector<vector<int>>& dp){
-        if(col>=n || col<0) return 1e9;
-        if(row==n-1) return matrix[row][col];
-        if(dp[row][col]!=-1) return dp[row][col];
-        
-        int ld = matrix[row][col] + f(row+1,col-1,matrix,n,dp);
-        int d = matrix[row][col] + f(row+1,col,matrix,n,dp);
-        int rd = matrix[row][col] + f(row+1,col+1,matrix,n,dp);
-        
-        return dp[row][col] = min(d,min(ld,rd));
-    }
-    
     int minFallingPathSum(vector<vector<int>>& matrix) {
-        int res = 1e9;
         int n = matrix.size();
-        vector<vector<int>> dp(n, vector<int> (n,-1));
-        for(int col=0;col<n;col++){
-            int m = f(0,col,matrix,n,dp);
-            if(res > m) res = m;
+        vector<vector<int>> dp(n, vector<int> (n,0));
+        for(int j=0;j<n;j++) dp[n-1][j] = matrix[n-1][j];
+        
+        for(int i=n-2;i>=0;i--){
+            for(int j=n-1;j>=0;j--){
+                int ld=1e9,rd=1e9,d=1e9;
+                if(j-1>=0) ld = matrix[i][j] + dp[i+1][j-1];
+                d = matrix[i][j] + dp[i+1][j];
+                if(j+1<n) rd = matrix[i][j] + dp[i+1][j+1];
+                
+                dp[i][j] = min(ld,min(d,rd));
+            }
         }
-        return res;
+        int mini = 1e9;
+        for(int i=0;i<n;i++){
+            cout << dp[0][i] << endl;
+            if(dp[0][i]<mini) mini = dp[0][i];
+        }
+        
+        return mini;
     }
 };
