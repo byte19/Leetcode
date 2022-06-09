@@ -16,6 +16,7 @@ public:
             }
         }
         int mini = 1e9;
+        
         for(int i=0;i<n;i++){
             if(dp[0][i]<mini) mini = dp[0][i];
         }
