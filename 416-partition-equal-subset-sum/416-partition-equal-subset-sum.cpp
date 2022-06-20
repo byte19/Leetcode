@@ -1,34 +1,37 @@
 class Solution {
 public:
-    int sum(vector<int>& arr){
-        int res = 0;
-        for(auto val:arr){
-            res+=val;
-        }
-        return res;
-    }
-    
-    bool solve(int ind,vector<int>& nums,int target,vector<vector<int>>& dp){
-        if(target==0) return true;
-        if(ind==0) return target==nums[0];
-        
-        if(dp[ind][target]!=-1) return dp[ind][target];
-        
-        bool not_take = solve(ind-1,nums,target,dp);
-        bool take = false;
-        if(target >= nums[ind]) take = solve(ind-1,nums,target-nums[ind],dp);
-        
-        return dp[ind][target] = not_take || take;
-    }
-    
     bool canPartition(vector<int>& nums) {
-        int total = sum(nums);
+        int total = 0;
         int n = nums.size();
-        if(total%2 == 0){
-            int target = total/2;
-            vector<vector<int>> dp(n, vector<int>(target+1,-1));
-            return solve(n-1,nums,target,dp);
+        for(int i=0;i<n;i++) total+=nums[i];
+        
+        if(total%2==1) return false;
+        else{
+        int k = total/2;
+        
+        vector<bool> prev(k+1,false);
+    
+        prev[0] = true;
+        
+        if(nums[0]<=k)
+            prev[nums[0]] = true;
+        
+        for(int ind = 1; ind<n; ind++){
+            vector<bool> cur(k+1,false);
+            cur[0] = true;
+            for(int target= 1; target<=k; target++){
+                bool notTaken = prev[target];
+        
+                bool taken = false;
+                    if(nums[ind]<=target)
+                        taken = prev[target-nums[ind]];
+            
+                cur[target]= notTaken||taken;
+            }
+            prev = cur;
         }
-        return false;
+        
+        return prev[k];
+        }
     }
 };
