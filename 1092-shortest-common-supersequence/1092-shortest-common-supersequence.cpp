@@ -18,10 +18,7 @@ public:
         string ans = "";
         while(i>0 && j>0){
             
-            if(str1[i-1]==str2[j-1]){
-                ans+=str1[i-1];
-                i--,j--;
-            }
+            if(str1[i-1]==str2[j-1]) ans+=str1[i-1],i--,j--;
             else if(dp[i-1][j]>dp[i][j-1]) ans+=str1[i-1],i--;
             else ans+=str2[j-1],j--;
         }
