@@ -20,7 +20,6 @@ public:
         return max(left,right);
     }
     void RSV(TreeNode* root,int k,vector<bool>& depth,vector<int>& res){
-        if(root==NULL) return;
         
         if(root){
             if(depth[k]==false){
