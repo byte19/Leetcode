@@ -1,5 +1,6 @@
+#include<bits/stdc++.h>
 class Solution {
-public:
+public:/*
     bool binarySearch(int end,vector<int>& mat,int target) {
         int start=0;
         end = end-1;
@@ -13,7 +14,7 @@ public:
         }
         return false;
         
-    }
+    }*/
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int m = matrix.size();
         int n = matrix[0].size();
@@ -22,7 +23,7 @@ public:
             if(matrix[i][n-1]==target || matrix[i][0]==target) return true;
             
             if(matrix[i][n-1] > target && matrix[i][0] < target) {
-                if(binarySearch(n,matrix[i],target)) return true;
+                if(binary_search(matrix[i].begin(),matrix[i].end(),target)) return true;
             }
         }
         return false;
