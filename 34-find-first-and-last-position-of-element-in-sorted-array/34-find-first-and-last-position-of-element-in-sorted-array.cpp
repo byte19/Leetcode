@@ -13,10 +13,7 @@ public:
         return -1;
     }
     vector<int> searchRange(vector<int>& nums, int target) {
-        if(nums.size()==1) {
-            if(nums[0]==target) return {0,0};
-            else return {-1,-1};
-        }
+        
         int ind = binarySearch(nums,nums.size(),target);
         if(ind==-1) return {-1,-1};
         else {
