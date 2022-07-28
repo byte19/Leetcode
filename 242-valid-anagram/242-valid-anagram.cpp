@@ -11,7 +11,6 @@ public:
             if(hash[t[i]]==0) return false;
             else hash[t[i]]-=1;
         }
-        
         unordered_map<char, int>::iterator it;
         for(it=hash.begin();it!=hash.end();it++) {
             if(hash[it->first]!=0) return false;
