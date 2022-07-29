@@ -19,4 +19,3 @@ class Solution(object):
             if encode(pattern, word) and encode(word, pattern):
                 res.append(word)
         return res
-                
