@@ -18,8 +18,6 @@ class Solution {
             adj[flights[i][0]].push_back({flights[i][1],flights[i][2]});
         }
         
-        // priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>> pq;
-        
         queue<pair<int,pair<int,int>>> pq;
         // {node,{cost,stops}}
         
@@ -40,12 +38,7 @@ class Solution {
                 if(stops >= 0 && disCost < dist[node]) {
                     dist[node] = disCost;
                     pq.push({node,{dist[node],stops-1}});
-                    // stops++;
                 }
-                // else if(stops >= 0) {
-                //     dist[node] = disCost;
-                //     pq.push({node,{dist[node],stops-1}});
-                // }
             }
         }
         if(dist[dst]==1e9) return -1;
