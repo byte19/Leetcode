@@ -10,15 +10,21 @@ class Solution{
         void merge(long long arr1[], long long arr2[], int n, int m) 
         { 
             // code here 
-            int arr[n+m];
-            for(int i=0;i<n;i++) arr[i] = arr1[i];
+            int j = 0, i = n-1;
             
-            for(int i=0;i<m;i++) arr[n+i] = arr2[i];
+            while(i >=0 && j<m) {
+                if(arr1[i] > arr2[j]) {
+                    int temp = arr1[i];
+                    arr1[i] = arr2[j];
+                    arr2[j] = temp;
+                    i--;
+                    j++;
+                }
+                else break;
+            }
             
-            sort(arr,arr+n+m);
-            
-            for(int i=0;i<n;i++) arr1[i] = arr[i];
-            for(int i=0;i<m;i++) arr2[i] = arr[n+i];
+            sort(arr1,arr1+n);
+            sort(arr2,arr2+m);
         } 
 };
 
