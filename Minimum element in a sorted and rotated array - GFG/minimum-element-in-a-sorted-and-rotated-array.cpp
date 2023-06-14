@@ -7,9 +7,18 @@ class Solution{
 public:
     int findMin(int arr[], int n){
         //complete the function here
+        int l = 0, h = n-1;
         int mini = 1e9;
-        for(int i=0;i<n;i++) mini = min(mini,arr[i]);
-        
+        while(l<=h) {
+            int mid = (l+h)/2;
+            mini = min(mini,arr[mid]);
+            
+            // right sorted then dont check because mid element always smaller than all elements at right
+            if(arr[mid] <= arr[h]) h = mid-1;
+            
+            // left sorted then dont check because left element always smaller than all elements till mid
+            else if(arr[l] <= arr[mid]) l = mid+1;
+        }
         return mini;
     }
 };
