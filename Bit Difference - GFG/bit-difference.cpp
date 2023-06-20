@@ -14,14 +14,13 @@ class Solution{
     int countBitsFlip(int a, int b){
         
         // Your logic here
-        int res = a ^ b;
+        int res = a ^ b; // xor to check flip bits
         int i = 0;
         int cnt = 0;
         while(1<<i <= res) {
             if(res & 1<<i) cnt++;
             i++;
         }
-        int v = 1<<0;
         return cnt;
     }
 };
