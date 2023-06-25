@@ -26,7 +26,8 @@ class Solution
     bool isBST(Node* root) 
     {
         vector<Node*> stack;
-        vector<int> res;
+        // vector<int> res;
+        int last_val = INT_MIN;
         Node* curr = root;
 
         while(!stack.empty() || curr!=NULL) {
@@ -38,13 +39,10 @@ class Solution
             else {
                 curr = stack.back();
                 stack.pop_back();
-                res.push_back(curr->data);
+                if(last_val >= curr->data) return false;
+                else last_val = curr->data;
                 curr = curr->right;
             }
-        }
-        
-        for(int i=1;i<res.size();i++) {
-            if(res[i] <= res[i-1]) return false;
         }
         return true;
     }
