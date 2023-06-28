@@ -29,7 +29,7 @@ class Solution{
     	        j++;
     	    }
     	    
-    	    if(curr_need > max_need) max_need = curr_need;
+    	    max_need = max(curr_need,max_need);
     	}
     	
     	return max_need;
