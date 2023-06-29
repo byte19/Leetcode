@@ -14,15 +14,13 @@ class Solution{
         int ans = 0;
         bool isNeg = false;
         if(str[0]=='-') isNeg = true;
-        int tens = 0;
-        if(isNeg) tens = pow(10,str.size()-2);
-        else tens = pow(10,str.size()-1);
-        for(int i=0;str[i]!='\0';i++) {
-            if(i==0 && str[i]=='-') continue;
+        int tens = 1;
+        for(int i=str.size()-1;i>=0;i--) {
+            if(i==0 && str[i]=='-') break;
             if(str[i]>='0' && str[i]<='9') {
                 int num = str[i]%48;
                 ans += tens*num;
-                tens = tens/10;
+                tens = tens*10;
             }
             else return -1;
         }
