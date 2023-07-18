@@ -14,19 +14,21 @@ public:
     {
         // code here
         vector<vector<int>> dp(N+1,vector<int>(W+1,0));
-        for(int j=wt[0];j<=W;j++) dp[0][j] = (j/wt[0])*val[0];
+        vector<int> prev(W+1,0), curr(W+1,0);
+        for(int j=wt[0];j<=W;j++) prev[j] = (j/wt[0])*val[0];
         // return fun(N-1,W,val,wt,dp);
         
         for(int ind = 1;ind<N;ind++) {
             for(int w = 0; w <= W; w++) {
-                int notTake = dp[ind-1][w];
+                int notTake = prev[w];
                 int take = 0;
-                if(w>=wt[ind]) take = val[ind] + dp[ind][w-wt[ind]];
+                if(w>=wt[ind]) take = val[ind] + curr[w-wt[ind]];
                 
-                dp[ind][w] = max(take,notTake);
+                curr[w] = max(take,notTake);
             }
+            prev = curr;
         }
-        return dp[N-1][W];
+        return prev[W];
     }
 };
 
