@@ -13,7 +13,6 @@ public:
     int knapSack(int N, int W, int val[], int wt[])
     {
         // code here
-        vector<vector<int>> dp(N+1,vector<int>(W+1,0));
         vector<int> prev(W+1,0), curr(W+1,0);
         for(int j=wt[0];j<=W;j++) prev[j] = (j/wt[0])*val[0];
         // return fun(N-1,W,val,wt,dp);
