@@ -1,34 +1,34 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include<bits/stdc++.h>
 using namespace std;
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution
 {
     public:
-    //Function to return max value that can be put in knapsack of capacity W.
-    int solve(int ind,int w[],int v[],int W,vector<vector<int>>& dp){
-        if(W==0) return 0;
-        if(ind==0){
-            if(W>=w[ind]) return v[ind];
-            else return 0;
-        }
-        if(dp[ind][W]!=-1) return dp[ind][W];
-        int not_steal = 0 + solve(ind-1,w,v,W,dp);
-        int steal = INT_MIN;
-        if(W>=w[ind]) steal = v[ind] + solve(ind-1,w,v,W-w[ind],dp);
+    int fun(int ind,int wt[],int val[],int n,int W,vector<vector<int>>& dp) {
+        if(ind==n) return 0;
         
-        return dp[ind][W] = max(steal,not_steal);
-}   
-        int knapSack(int W, int wt[], int val[], int n) 
-        {
-            vector<vector<int>> dp(n,vector<int>(W+1,-1));
-        	return solve(n-1,wt,val,W,dp);
-        }
+        if(dp[ind][W]!=-1) return dp[ind][W];
+        
+        int notTake = 0 + fun(ind+1,wt,val,n,W,dp);
+        int take = 0;
+        if(W >= wt[ind]) take = val[ind] + fun(ind+1,wt,val,n,W-wt[ind],dp);
+        
+        return dp[ind][W] = max(take,notTake);
+        
+    }
+    //Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, int wt[], int val[], int n) 
+    { 
+       // Your code here
+       vector<vector<int>> dp(n,vector<int>(W+1,-1));
+       return fun(0,wt,val,n,W,dp);
+    }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main()
  {
@@ -57,4 +57,5 @@ int main()
         
     }
 	return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
