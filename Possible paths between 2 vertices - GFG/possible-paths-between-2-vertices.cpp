@@ -11,7 +11,6 @@ class Solution {
         vector<int> vis(V,0);
         queue<int> q;
         q.push(source);
-        vis[source] = 1;
         int ans = 0;
         while(!q.empty()) {
             int ver = q.front();
@@ -22,7 +21,6 @@ class Solution {
             else {
                 for(auto node: adj[ver]) {
                     q.push(node);
-                    vis[node]=1;
                 }
             }
         }
