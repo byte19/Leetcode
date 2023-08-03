@@ -9,7 +9,6 @@ using namespace std;
 class Solution {
   public:
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
-        // code here
         vector<int> cost(N,1e9);
         unordered_map<int,vector<pair<int,int>>> adj;
         for(auto edge: edges) adj[edge[0]].push_back({edge[1],edge[2]});
@@ -19,20 +18,14 @@ class Solution {
         while(!q.empty()) {
             auto it = q.front();
             q.pop();
-            int node = it.first;
-            int c = it.second;
-            for(auto t: adj[node]) {
-                int d = t.first;
-                int co = t.second;
-                if(cost[d] > co+c) {
-                    cost[d] = co+c;
-                    q.push({d,co+c});
+            for(auto t: adj[it.first]) {
+                if(cost[t.first] > t.second + it.second) {
+                    cost[t.first] = t.second + it.second;
+                    q.push({t.first, t.second + it.second});
                 }
             }
         }
-        for(int i=0;i<N;i++) {
-            if(cost[i]==1e9) cost[i] = -1;
-        }
+        for(int i=0;i<N;i++) if(cost[i]==1e9) cost[i] = -1;
         return cost;
     }
 };
