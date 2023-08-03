@@ -8,28 +8,32 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
-     void dfs(int node,unordered_map<int,vector<vector<int>>>& adj,vector<int>& ans,int N,int M,int cost) {
-        //  ans[node] = min(ans[node],cost);
-         
-         for(int j=0;j<adj[node].size();j++) {
-             dfs(adj[node][j][0],adj,ans,N,M,cost + adj[node][j][1]);
-         }
-         ans[node] = min(ans[node],cost);
-     }
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
         // code here
-        unordered_map<int,vector<vector<int>>> adj;
-        for(int i=0;i<M;i++) {
-            adj[edges[i][0]].push_back({edges[i][1],edges[i][2]});
+        vector<int> cost(N,1e9);
+        unordered_map<int,vector<pair<int,int>>> adj;
+        for(auto edge: edges) adj[edge[0]].push_back({edge[1],edge[2]});
+        queue<pair<int,int>> q;
+        q.push({0,0});
+        cost[0] = 0;
+        while(!q.empty()) {
+            auto it = q.front();
+            q.pop();
+            int node = it.first;
+            int c = it.second;
+            for(auto t: adj[node]) {
+                int d = t.first;
+                int co = t.second;
+                if(cost[d] > co+c) {
+                    cost[d] = co+c;
+                    q.push({d,co+c});
+                }
+            }
         }
-        vector<int> ans(N,1e9);
-        ans[0] = 0;
-        dfs(0,adj,ans,N,M,0);
         for(int i=0;i<N;i++) {
-            if(ans[i]==1e9) ans[i]=-1;
+            if(cost[i]==1e9) cost[i] = -1;
         }
-        return ans;
-        // return {0,1,3,4,3};
+        return cost;
     }
 };
 
