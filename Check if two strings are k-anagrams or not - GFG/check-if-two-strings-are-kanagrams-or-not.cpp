@@ -12,19 +12,30 @@ class Solution {
   public:
     bool areKAnagrams(string str1, string str2, int k) {
         if(str1.size()!= str2.size()) return 0;
+        
         unordered_map<char,int> map;
+        
         for(auto c:str1) map[c]+=1;
+        
         int s1 = map.size();
+        
         int cnt = 0;
+        
         for(auto c:str2) {
+        
             if(map.find(c)!=map.end()) {
+        
                 map[c]-=1;
+        
                 if(map[c]==0) {
                     map.erase(c);
                 }
+        
             }
+        
             else cnt++;
         }
+        
         return cnt<=k;
     }
 };
