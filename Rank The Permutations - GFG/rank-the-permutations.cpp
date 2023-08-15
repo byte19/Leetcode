@@ -12,7 +12,7 @@ class Solution{
         long long fact[n+1]={0};
         fact[0]=1;
         long long ans = 1;
-        for(int i=1;i<=n;i++) fact[i]=i*fact[i-1];
+        for(int i=1;i<n;i++) fact[i]=i*fact[i-1];
         
         for(int i=0;i<n-1;i++) {
             int count = 0;
