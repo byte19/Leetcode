@@ -8,7 +8,6 @@ using namespace std;
 class Solution{
   public:
     long long findRank(string str) {
-        //code here
         int n=str.size();
         long long fact[n+1]={0};
         fact[0]=1;
