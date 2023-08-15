@@ -26,7 +26,6 @@ class Solution{
             ans+=st.top().first;
             st.pop();
         }
-        // reverse(ans.begin(),ans.end());
         return ans;
     }
 
