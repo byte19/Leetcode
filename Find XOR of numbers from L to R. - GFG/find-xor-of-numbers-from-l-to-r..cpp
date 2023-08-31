@@ -9,18 +9,22 @@ using namespace std;
 
 class Solution {
   public:
-    int fun(int num) {
-        if(num%4 ==0) return num;
-        
-        if(num%4 ==1) return 1;
-        
-        if(num%4 ==2) return num+1;
-        
-        
-        return 0;
+    int computeXOR(int n)
+    {
+      if (n % 4 == 0)
+        return n;
+     
+      if (n % 4 == 1)
+        return 1;
+     
+      if (n % 4 == 2)
+        return n + 1;
+     
+      return 0;
     }
     int findXOR(int l, int r) {
-        return fun(l-1)^fun(r);
+        int xorR = computeXOR(r),xorL= computeXOR(l-1);
+        return xorR^xorL;
     }
 };
 
