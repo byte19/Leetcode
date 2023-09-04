@@ -118,26 +118,21 @@ public:
     {
         priority_queue <int, vector<int>, greater<int> > pq;
         queue<pair<Node*,int>> q;
-        
+        int count =0;
         q.push({root,1});
         while(!q.empty()) {
             Node* cur = q.front().first;
             int lvl = q.front().second;
             q.pop();
             
-            if(!cur->left && !cur->right) pq.push(lvl);
+            if(!cur->left && !cur->right) {
+                k -= lvl;
+                if(k>=0) count++;
+                else break;
+            }
             
             if(cur->left) q.push({cur->left,lvl+1});
             if(cur->right) q.push({cur->right,lvl+1});
-        }
-        int count = 0;
-        while(!pq.empty()) {
-            if(k-pq.top() >= 0) {
-                k-=pq.top();
-                count++;
-                pq.pop();
-            }
-            else break;
         }
         return count;
     }
