@@ -116,9 +116,8 @@ class Solution
 public:
     int getCount(Node *root, int k)
     {
-        priority_queue <int, vector<int>, greater<int> > pq;
         queue<pair<Node*,int>> q;
-        int count =0;
+        int count = 0;
         q.push({root,1});
         while(!q.empty()) {
             Node* cur = q.front().first;
