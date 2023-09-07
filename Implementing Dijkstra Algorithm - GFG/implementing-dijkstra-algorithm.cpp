@@ -8,27 +8,29 @@ class Solution
 	public:
 	//Function to find the shortest distance of all the vertices
     //from the source vertex S.
-    vector <int> dijkstra(int V, vector<vector<int>> adj[], int s)
+    vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
-        vector<int> visCost(V,1e9);
-        visCost[s]=0;
+        // unordered_map<int,vector<pair<int,int>>> AdjList;
+        // for(int i=0;i<V;i++) {
+        //     AdjList[adj[i][0]].push(back)
+        // }
+        vector<int> cost(V,1e9);
+        cost[S] = 0;
         queue<pair<int,int>> q;
-        q.push({s,0});
-        
+        q.push({S,0});
         while(!q.empty()) {
             int node = q.front().first;
-            int cost = q.front().second;
-            
+            int c = q.front().second;
             q.pop();
-            for(auto lis: adj[node]) {
-                if(cost+lis[1] < visCost[lis[0]]) {
-                    visCost[lis[0]] = cost + lis[1];
-                    q.push({lis[0],visCost[lis[0]]});
+            
+            for(auto it: adj[node]) {
+                if((c + it[1]) < cost[it[0]]) {
+                    cost[it[0]] = c+it[1];
+                    q.push({it[0],c+it[1]});
                 }
             }
         }
-        return visCost;
-        
+        return cost;
     }
 };
 
