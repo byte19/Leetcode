@@ -113,25 +113,28 @@ struct Node
 // your task is to complete this function
 int kthAncestor(Node *root, int k, int node)
 {
-    unordered_map<Node*,Node*> parent;
+    if(root->data == node) return -1;
+    unordered_map<int,int> parent;
+    parent[root->data] = -1;
     queue<Node*> q;
     q.push(root);
     while(!q.empty()) {
         Node* cur = q.front();
         q.pop();
-        if(cur->data != node) {
-            if(cur->left) parent[cur->left] = cur,q.push(cur->left);
-            if(cur->right) parent[cur->right] = cur,q.push(cur->right);
+        
+        if(cur->left) {
+            parent[cur->left->data] = cur->data;
+            q.push(cur->left);
         }
-        else {
-            while(k && cur!=root) {
-                Node* par = parent[cur];
-                cur = par;
-                k--;
-            }
-            if(k==0) return cur->data;
-            else return -1;
+        if(cur->right) {
+            parent[cur->right->data] = cur->data;
+            q.push(cur->right);
         }
+    }
+    while(k && parent[node]!=-1) {
+        node = parent[node];
+        k--;
+        if(k==0) return node;
     }
     return -1;
 }
