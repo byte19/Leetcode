@@ -27,12 +27,11 @@ int longestSubstrDistinctChars (string s)
     int i=0, j = 0;
     while(j<n) {
         chars[s[j]-'a']+=1;
-        if(chars[s[j]-'a'] > 1) {
-            while(chars[s[j]-'a'] > 1) {
-                chars[s[i]-'a']-=1;
-                i++;
-            }
+        while(chars[s[j]-'a'] > 1) {
+            chars[s[i]-'a']-=1;
+            i++;
         }
+        
         ans = max(ans,j-i+1);
         j++;
     }
