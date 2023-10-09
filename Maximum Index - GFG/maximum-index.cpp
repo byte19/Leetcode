@@ -6,6 +6,9 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 public:
+/*
+https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
+*/
     int maxIndexDiff(int arr[], int n) {
         int maxFromEnd[n];
         
