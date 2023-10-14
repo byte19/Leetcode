@@ -18,12 +18,9 @@ public:
 	        
 	        if(mod==0) ans = i+1;
 	        
-	        else if(m.find(mod)==m.end()) {
-	            m[mod] = i;
+	        else if(m.find(mod)==m.end()) m[mod] = i;
 	        
-	        else {
-	            ans = max(ans,i-m[mod]);
-	        }
+	        else ans = max(ans,i-m[mod]);
 	    }
 	    return ans;
 	}
