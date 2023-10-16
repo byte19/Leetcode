@@ -8,34 +8,47 @@ using namespace std;
 
 class Solution {
   public:
-    void bfs(vector<vector<int>> adj,int i,vector<int>& vis,int V) {
-        queue<int> q;
-        q.push(i);
-        
-        while(q.size()>0) {
-            int curr = q.front();
-            q.pop();
-            
-            vis[curr]=1;
-            for(int j=0;j<V;j++) {
-                if(curr!=j && adj[curr][j]==1 && vis[j]==0) q.push(j);
-            }
-        }
-    }
+    vector<int> parent;
+	vector<int> rank;
+	int findPar(int node) {
+	    if(node==parent[node]) return node;
+	    
+	    return parent[node] = findPar(parent[node]);
+	}
+	void findUnion(int u,int v) {
+	    int u_ulp = findPar(u);
+	    int v_ulp = findPar(v);
+	    
+	    if(u_ulp==v_ulp) return;
+	    
+	    if(rank[u_ulp] == rank[v_ulp]) {
+	        parent[u_ulp] = v_ulp;
+	        rank[v_ulp]+=1;
+	    }
+	    else if(rank[u_ulp] > rank[v_ulp]) {
+	        parent[v_ulp] = u_ulp;
+	    }
+	    else{
+	        parent[u_ulp] = v_ulp;
+	    }
+	    
+	}
     int numProvinces(vector<vector<int>> adj, int V) {
-        // code here
-        // vector<int> res(V,0);
-        vector<int> vis(V,0);
-        int prov = 0;
+        parent.resize(V+1,0);
+        rank.resize(V+1,0);
+        for(int i=0;i<V;i++) parent[i] = i;
         
-        for(int i=0;i<V;i++) {
-            if(vis[i]==0) {
-                // vis[i]=1;
-                bfs(adj,i,vis,V);
-                prov++;
+        for(int u=0;u<V;u++) {
+            for(int v=0;v<V;v++) {
+                if(adj[u][v]==1) {
+                    findUnion(u,v);
+                }
             }
         }
-        return prov;
+        int cnt = 0;
+        for(int i=0;i<V;i++) cnt += (parent[i]==i)?1 : 0;
+        
+        return cnt;
     }
 };
 
